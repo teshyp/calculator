@@ -16,18 +16,21 @@
     height: 400px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid: ;
 }
+
 
 #display-container {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
     border: solid red 1px;
+    background-color: rgb(47, 47, 47);
+    color: white;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
-    height: 3rem;
-    font-size: 3rem;
+    height: 5.5rem;
+    font-size: 2.4rem;
 }
+
 
 button {
     margin: 0.1rem;
@@ -39,8 +42,20 @@ button {
     background-color: orange;
 }
 
+.number-btns {
+    background-color: rgb(86, 183, 228);
+}
+
 #zero {
     grid-column-start: 1;
     grid-column-end: 3;
     width: 10rem;
+}
+
+#equals {
+    background-color: green;
+}
+
+#clear {
+    background-color: hotpink;
 }
