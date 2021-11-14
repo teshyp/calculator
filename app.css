@@ -14,7 +14,7 @@ body {
     border: solid black 3px;
     border-radius: 1.5rem;
     background-color: #bde0fe;
-    padding: 0.5rem;
+    padding: 0.6rem;
 }
 
 #btn-frame {
@@ -28,7 +28,7 @@ body {
     height: 6rem;
     display: flex;
     flex-direction: column;
-    border: solid rgb(0, 0, 0) 1px;
+    border: solid rgb(0, 0, 0) 1.9px;
     border-radius: 1rem;
     background-color: #f5e6ec;
     color: rgb(1, 0, 0);
@@ -51,14 +51,23 @@ button {
     border-radius: 0.5rem;
     color: black;
     font-size: 1.5rem;
+    cursor: pointer;
 }
 
 .op-btns {
     background-color: #ffafcc;
 }
 
+.op-btns:hover {
+    background-color: #f6c5d7;
+}
+
 .number-btns {
     background-color: #cdb4db;
+}
+
+.number-btns:hover {
+    background-color: #d6c6df;
 }
 
 #zero {
@@ -72,6 +81,10 @@ button {
     grid-column-end: 3;
     width: 10rem;
     background-color: #ffc8dd;
+}
+
+#clear:hover {
+    background-color: #f8d3e1;
 }
 
 

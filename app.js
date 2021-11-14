@@ -37,47 +37,81 @@ numbBtn.forEach((numberBtn) => {
 
 opBtn.forEach(op => {
     op.addEventListener("click", (e) => {
-        userOp += e.target.value;
-        displayCalcBox.innerHTML = userOp;
-        return userOp
+        if (userOp == "") {
+            userOp += e.target.value;
+            displayCalcBox.innerHTML = userOp;
+            return userOp
+        } else {
+
+        }
     })
 });
+
+// function for each operator
+
+function add(firstValue, secValue) {
+    runningTotal = firstValue + secValue;
+    firstValue = runningTotal;
+    return runningTotal;
+}
+
+function substract(firstValue, secValue) {
+    runningTotal = firstValue - secValue;
+    return runningTotal;
+}
+
+function multiply(firstValue, secValue) {
+    runningTotal = firstValue * secValue;
+    return runningTotal;
+}
+
+function divide(firstValue, secValue) {
+    runningTotal = firstValue / secValue;
+    return runningTotal;
+}
+
+function percentage(firstValue) {
+    runningTotal = firstValue / 100;
+    return runningTotal;
+}
+
+
+
+
 
 // Run full calcualtor by pressing equals key and display final result
 sumKey.addEventListener("click", function () {
     decimalBtn.disabled = false;
 
     if (userOp == "/" && secValue == "0") {
-        displayCalcBox.innerHTML = "Error - zero division"
+        displayCalcBox.innerHTML = "Dividing by zero?"
+        displayBox.innerHTML = "Press clear"
     } else {
 
-        if (userOp == "+") {
-            runningTotal = firstValue + secValue;
-            displayBox.innerHTML = runningTotal;
-            return runningTotal
-        } else if (userOp == "*") {
-            runningTotal = firstValue * secValue;
-            displayBox.innerHTML = runningTotal;
-            return runningTotal
-        } else if (userOp == "-") {
-            runningTotal = firstValue - secValue;
-            displayBox.innerHTML = runningTotal;
-            return runningTotal
-        } else if (userOp == "/") {
-            runningTotal = firstValue / secValue;
-            displayBox.innerHTML = runningTotal;
-            return runningTotal
-        } else if (userOp == "%") {
-            runningTotal = (firstValue / 100) * secValue;
-            displayBox.innerHTML = runningTotal;
-            return runningTotal;
-        }
-
+        switch (userOp) {
+            case "+":
+                runningTotal = add(Number(firstValue), Number(secValue));
+                break;
+            case "-":
+                runningTotal = substract(Number(firstValue), Number(secValue));
+                break;
+            case "*":
+                runningTotal = multiply(Number(firstValue), Number(secValue));
+                break;
+            case "/":
+                runningTotal = divide(Number(firstValue), Number(secValue));
+                break;
+            case "%":
+                runningTotal = percentage(Number(firstValue), Number(secValue));
+                break;
+            default:
+                break;
+        };
+        displayBox.innerText = +runningTotal.toFixed(2);
+        userOp = "";
+        secValue = "";
+        firstValue = runningTotal;
     }
-
-
-
-    // rewrite above as switch statement
 });
 
 // Reset calculator and all variables
