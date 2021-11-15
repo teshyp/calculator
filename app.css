@@ -87,7 +87,12 @@ button {
     background-color: #f8d3e1;
 }
 
+#profileLink {
+    font-style: none;
+    color: rgb(74, 31, 118);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 
-/* #clear {
-    background-color: hotpink;
-} */
+a {
+    text-decoration: none;
+}

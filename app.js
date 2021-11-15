@@ -39,7 +39,7 @@ numbBtn.forEach((numberBtn) => {
 
 opBtn.forEach(op => {
     op.addEventListener("click", (e) => {
-        if (userOp == "") {
+        if (userOp == "" || secValue == "") {
             userOp = e.target.value;
             displayCalcBox.innerHTML = userOp;
             return userOp
@@ -80,7 +80,8 @@ function percentage(firstValue) {
 function operateCalc() {
     decimalBtn.disabled = false;
 
-    if (userOp == "/" && secValue == "0") {
+
+    if (userOp !== "/" && secValue == "0") {
         displayCalcBox.innerHTML = "Dividing by zero?"
         displayBox.innerHTML = "Press clear"
 
