@@ -1,4 +1,4 @@
-// * grab elements from html 
+// * DOM elements
 const displayBox = document.getElementById('display-result');
 const displayCalcBox = document.getElementById('display-calc');
 const numbBtn = document.querySelectorAll(".number-btns");
@@ -8,11 +8,13 @@ const delBtn = document.getElementById("del");
 const decimalBtn = document.getElementById("decimal");
 const sumKey = document.getElementById("equals");
 
+
 // Declare data variables
 let firstValue = "";
 let userOp = "";
 let secValue = "";
 let runningTotal;
+
 
 //Event listeners to obtain input values and update display fields on each click
 numbBtn.forEach((numberBtn) => {
@@ -38,17 +40,15 @@ numbBtn.forEach((numberBtn) => {
 opBtn.forEach(op => {
     op.addEventListener("click", (e) => {
         if (userOp == "") {
-            userOp += e.target.value;
+            userOp = e.target.value;
             displayCalcBox.innerHTML = userOp;
             return userOp
-        } else {
-
         }
     })
 });
 
-// function for each operator
 
+// function for each math operator
 function add(firstValue, secValue) {
     runningTotal = firstValue + secValue;
     firstValue = runningTotal;
@@ -76,18 +76,15 @@ function percentage(firstValue) {
 }
 
 
-
-
-
-// Run full calcualtor by pressing equals key and display final result
-sumKey.addEventListener("click", function () {
+// function to operate calculator and display final result
+function operateCalc() {
     decimalBtn.disabled = false;
 
     if (userOp == "/" && secValue == "0") {
         displayCalcBox.innerHTML = "Dividing by zero?"
         displayBox.innerHTML = "Press clear"
-    } else {
 
+    } else {
         switch (userOp) {
             case "+":
                 runningTotal = add(Number(firstValue), Number(secValue));
@@ -112,14 +109,49 @@ sumKey.addEventListener("click", function () {
         secValue = "";
         firstValue = runningTotal;
     }
-});
+};
 
-// Reset calculator and all variables
-resetBtn.addEventListener("click", function (e) {
+// function to reset calculator
+function resetCalc() {
     firstValue = "";
     secValue = "";
     userOp = "";
-    displayCalcBox.innerHTML = 0;
-    displayBox.innerHTML = 0;
+    displayCalcBox.innerHTML = "";
+    displayBox.innerHTML = "";
     decimalBtn.disabled = false;
-});
+    console.log("Calculator reset")
+};
+
+
+// Function for keyboard support
+function keyboardSupport(e) {
+    // get numbers between 0-9 and update display
+    if (e.key >= 0 && e.key <= 9 || e.key == '.') {
+        if (firstValue == "" || userOp == "") {
+            let pressedVal = e.key;
+            firstValue += pressedVal;
+            displayCalcBox.innerHTML = firstValue;
+            console.log("firstValue" + " " + firstValue);
+        } else {
+            let secPressedVal = e.key;
+            secValue += secPressedVal;
+            displayCalcBox.innerHTML = secValue;
+            console.log(firstValue + userOp + secValue);
+        }
+    };
+    // get operator value and update display
+    if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
+        if (userOp === "") {
+            userOp = e.key;
+            displayCalcBox.innerHTML = userOp;
+            console.log(firstValue + userOp);
+        }
+    }
+    if (e.key == '=' || e.key == 'Enter') operateCalc(); // operate calc on Enter or equals
+    if (e.key == 'Delete' || e.key == "Backspace" || e.key == "Escape") resetCalc(); // reset calculator on del and esc
+}
+
+// Event Listeners
+window.addEventListener("keydown", keyboardSupport) // Keyboard support
+sumKey.addEventListener("click", operateCalc) // Run full calcualtor click on sum
+resetBtn.addEventListener("click", resetCalc)// Reset calculator and all variables
